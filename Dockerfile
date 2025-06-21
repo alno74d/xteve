@@ -3,15 +3,16 @@ RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache ca-certificates
 
-MAINTAINER alturismo alturismo@gmail.com
-
 # Extras
 RUN apk add --no-cache curl
 
 # Timezone (TZ)
 RUN apk update && apk add --no-cache tzdata
-ENV TZ=Europe/Berlin
+ENV TZ=Europe/Madrid
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# Port
+ENV PORT=34400
 
 # Add Bash shell & dependancies
 RUN apk add --no-cache bash busybox-suid su-exec
@@ -39,7 +40,7 @@ RUN chmod +x /cronjob.sh
 RUN chmod +x /usr/bin/xteve
 
 # Expose Port
-EXPOSE 34400
+EXPOSE $PORT
 
 # Entrypoint
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh", "$PORT"]

@@ -30,7 +30,7 @@ if [ -f "$XTEVE_FILE" ]; then
 	. $XTEVE_FILE
 else
 	cp /sample_xteve.txt /config/sample_xteve.txt
-	xteve -port=34400 -config=/root/.xteve/
+	xteve -port=$1 -config=/root/.xteve/
 fi
 
 exit
