@@ -43,4 +43,4 @@ RUN chmod +x /usr/bin/xteve
 EXPOSE $PORT
 
 # Entrypoint
-ENTRYPOINT ["./entrypoint.sh", "${PORT}"]
+ENTRYPOINT sh -c './entrypoint.sh "$PORT"'
