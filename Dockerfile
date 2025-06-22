@@ -12,7 +12,7 @@ ENV TZ=Europe/Madrid
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Port
-ENV PORT=34400
+ARG PORT=34400
 
 # Add Bash shell & dependancies
 RUN apk add --no-cache bash busybox-suid su-exec
@@ -43,4 +43,4 @@ RUN chmod +x /usr/bin/xteve
 EXPOSE $PORT
 
 # Entrypoint
-ENTRYPOINT ["./entrypoint.sh", $PORT]
+ENTRYPOINT ["./entrypoint.sh", "${PORT}"]
